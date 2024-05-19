@@ -64,3 +64,67 @@ node scripts/activityScripts.js ConverterObject
 node scripts/activityScripts.js RequesterObject
 ```
 這將啟動請求任務，將 JSON 文件中的數據讀取出來，模擬發送到指定的虛擬端點，並記錄響應。
+
+## csv 内容:
+```
+賽事名稱	每人最低價
+札幌馬拉松	6000
+山形馬拉松	6600
+神戶馬拉松	12150
+// 其他...
+```
+
+## csv to json 内容:
+```json
+[
+  {
+    "name": "札幌馬拉松",
+    "price": 6000
+  },
+  {
+    "name": "山形馬拉松",
+    "price": 6600
+  },
+  {
+    "name": "神戶馬拉松",
+    "price": 12150
+  }
+  // 其他...
+]
+```
+
+## Response 響應内容:
+
+成功響應:
+```json
+{
+  "url": "https://api.schedule.asiayo.com/",
+  "contentType": "application/JSON",
+  "headers": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/JSON",
+    "date": "Wed, 01 May 2099 00:00:00 GMT",
+    "server": "nginx",
+    "x-request-id": "679723986539296061"
+  },
+  "status": 200,
+  "body": "{\"status\":{\"code\":200,\"msg\":\"Success\"}}"
+}
+```
+
+錯誤響應:
+```json
+{
+  "url": "https://api.schedule.asiayo.com/",
+  "contentType": "application/JSON",
+  "headers": {
+    "cache-control": "no-cache, private",
+    "content-type": "application/JSON",
+    "date": "Wed, 01 May 2099 00:00:00 GMT",
+    "server": "nginx",
+    "x-request-id": "679723986539296061"
+  },
+  "status": 400,
+  "body": "{\"status\":{\"code\":400,\"msg\":\"Validation failed.\"},\"data\":{\"errors\":{\"price\":[\"The price must be numeric\"]}}}"
+}
+```

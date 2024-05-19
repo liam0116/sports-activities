@@ -7,6 +7,17 @@ class RequesterObject extends AbstractServiceObject {
     this.jsonFilePath = jsonFilePath; // 設置 JSON 文件的路徑
     this.headers = headers; // 設置請求的標頭
     this.apiEndpointUrl = apiEndpointUrl; // 設置 API 端點的 URL
+    this.defaultResponse = {
+      "url": this.apiEndpointUrl,
+      "contentType": "application/JSON",
+      "headers": {
+        "cache-control": "no-cache, private",
+        "content-type": "application/JSON",
+        "date": "Wed, 01 May 2099 00:00:00 GMT",
+        "server": "nginx",
+        "x-request-id": "679723986539296061"
+      }
+    }; // 設置默認回應結構
   }
 
   async execute() {
@@ -49,27 +60,18 @@ class RequesterObject extends AbstractServiceObject {
     return new Promise((resolve) => {
       this.log(`Sending payload: ${JSON.stringify(activity)}`); // 記錄發送的數據
       this.log(`Headers: ${JSON.stringify(this.headers)}`); // 記錄請求的標頭
+
       setTimeout(() => {
         // 檢查價格是否為整數
+        let mockApiResponse = { ...this.defaultResponse };
         if (Number.isInteger(activity.price)) {
-          resolve({ status: 200, body: "{\"status\":{\"code\":200,\"msg\":\"Success\"}}" }); // 如果價格為整數，返回成功回應
+          mockApiResponse.status = 200;
+          mockApiResponse.body = "{\"status\":{\"code\":200,\"msg\":\"Success\"}}";
         } else {
-          // 如果價格不是整數，返回模擬的錯誤回應
-          const mockApiResponse = {
-            "url": this.apiEndpointUrl,
-            "status": 400,
-            "contentType": "application/JSON",
-            "headers": {
-              "cache-control": "no-cache, private",
-              "content-type": "application/JSON",
-              "date": "Wed, 01 May 2099 00:00:00 GMT",
-              "server": "nginx",
-              "x-request-id": "679723986539296061"
-            },
-            "body": "{\"status\":{\"code\":400,\"msg\":\"Validation failed.\"},\"data\":{\"errors\":{\"price\":[\"The price must be numeric\"]}}}"
-          };
-          resolve(mockApiResponse);
+          mockApiResponse.status = 400;
+          mockApiResponse.body = "{\"status\":{\"code\":400,\"msg\":\"Validation failed.\"},\"data\":{\"errors\":{\"price\":[\"The price must be numeric\"]}}}";
         }
+        resolve(mockApiResponse);
       }, 1000); // 模擬 1 秒延遲
     });
   }
