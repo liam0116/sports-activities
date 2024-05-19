@@ -32,8 +32,10 @@ npm install
 `data/`: 數據文件
 
 ## 執行任務命令：
+
+先 `cd` 至專案底下
 ```bash
-node npm start
+npm start
 ```
 or
 ```bash
