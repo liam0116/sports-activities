@@ -2,7 +2,7 @@ const fs = require('fs');
 const ActivityFactory = require('../factory/ActivityFactory');
 const { csvFilePath, jsonFilePath } = require('../config/ActivityConfig');
 
-class ActivityRunner {
+class ActivityScripts {
   static clearDataDirectory() {
     if (fs.existsSync(csvFilePath)) {
       fs.unlinkSync(csvFilePath);
@@ -67,12 +67,12 @@ const taskType = args[0];
 
 if (taskType) {
   // 根據命令行參數執行指定的任務
-  ActivityRunner.runTask(taskType).catch((error) => {
+  ActivityScripts.runTask(taskType).catch((error) => {
     console.error(`Error running task ${taskType}:`, error);
   });
 } else {
   // 如果沒有指定任務，則執行所有定義的服務
-  ActivityRunner.runAllScripts().catch((error) => {
+  ActivityScripts.runAllScripts().catch((error) => {
     console.error('Error running all scripts:', error);
   });
 }

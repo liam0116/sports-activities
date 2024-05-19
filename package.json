@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"No tests specified\"",
-    "start": "node scripts/activityScripts.js"
+    "start": "node scripts/ActivityScripts.js"
   },
   "keywords": [],
   "author": "",

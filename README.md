@@ -1,6 +1,6 @@
-# 主腳本 (activityScripts.js)
+# 主腳本 (ActivityScripts.js)
 
-activityScripts.js 是主腳本，負責根據傳入的參數來選擇執行不同的任務。它通過調用 ActivityFactory 來創建相應的對象實例，並調用這些實例的 execute 方法。
+ActivityScripts.js 是主腳本，負責根據傳入的參數來選擇執行不同的任務。它通過調用 ActivityFactory 來創建相應的對象實例，並調用這些實例的 execute 方法。
 
 ## 依賴項
 本項目使用以下依賴項：
@@ -39,7 +39,7 @@ npm start
 ```
 or
 ```bash
-node scripts/activityScripts.js
+node scripts/ActivityScripts.js
 ```
 
 ## 可以執行特定任務：
@@ -47,21 +47,21 @@ node scripts/activityScripts.js
 ### ScraperObject
 執行 ScraperObject 的命令：
 ```bash
-node scripts/activityScripts.js ScraperObject
+node scripts/ActivityScripts.js ScraperObject
 ```
 這將啟動網頁抓取任務，將目標網頁上的數據抓取下來，並保存到 CSV 文件中。
 
 ### ConverterObject
 執行 ConverterObject 的命令：
 ```bash
-node scripts/activityScripts.js ConverterObject
+node scripts/ActivityScripts.js ConverterObject
 ```
 這將啟動轉換任務，將 CSV 文件中的數據轉換為 JSON 格式並保存到 JSON 文件中。
 
 ### RequesterObject
 執行 RequesterObject 的命令：
 ```bash
-node scripts/activityScripts.js RequesterObject
+node scripts/ActivityScripts.js RequesterObject
 ```
 這將啟動請求任務，將 JSON 文件中的數據讀取出來，模擬發送到指定的虛擬端點，並記錄響應。
 
